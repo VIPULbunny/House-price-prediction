@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Registration Form</title>
+    <!-- JavaScript for togglePasswordVisibility function -->
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            var icon = document.querySelector(".toggle-password");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+    </script>
+    <style>
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            padding: 10px 20px;
+            border-bottom-left-radius: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 25px;
+        }
+        .navbar a:hover {
+            color: lightgray;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            height: 100px;
+            width: 400px;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+        .message1, .message2 {
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            width: 400px;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+        .success-message {
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+        }
+        .error-message {
+            background-color: #f2dede;
+            color: #a94442;
+            border: 1px solid #ebccd1;
+        }
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: 2px;
+            cursor: pointer;
+            font-size: 30px;
+            color: #666;
+        }
+        .close-button:hover {
+            color: #000;
+        }
+    </style>
+    <script>
+        function hideMessage(messageId) {
+            document.getElementById(messageId).style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Success/Error Message Display -->
+    <?php if (!empty($success_message)) { ?>
+        <div id="success-message" class="message1 success-message">
+            <?php echo $success_message; ?>
+            <span class="close-button" onclick="hideMessage('success-message')">&times;</span>
+        </div>
+    <?php } ?>
+
+    <?php if (!empty($error_message)) { ?>
+        <div id="error-message" class="message error-message">
+            <?php echo $error_message; ?>
+            <span class="close-button" onclick="hideMessage('error-message')">&times;</span>
+        </div>
+    <?php } ?>
+
+    <!-- Registration Form -->
+    <div class="content">
+        <div class="text">Registration Form</div>
+        <form action="register.php" method="post">
+            <div class="field">
+                <input type="text" id="username" name="username" required>
+                <span class="fas fa-user"></span>
+                <label>Username</label>
+            </div>
+            <div class="field">
+                <input type="text" id="email" name="email" required>
+                <span class="fas fa-envelope"></span>
+                <label>Email</label>
+            </div>
+            <div class="field">
+                <input type="text" id="phone" name="phone" required>
+                <span class="fas fa-phone"></span>
+                <label>Phone</label>
+            </div>
+            <div class="field">
+                <input type="password" id="password" name="password" required>
+                <span class="fas fa-lock"></span>
+                <span class="toggle-password fas fa-eye" onclick="togglePasswordVisibility()"></span>
+                <label>Password</label>
+            </div>
+            <button type="submit">Register</button>
+            <div class="sign-up">Already a member? <a href="../login/login.php">Login now</a></div>
+        </form>
+    </div>
+
+</body>
+</html>
